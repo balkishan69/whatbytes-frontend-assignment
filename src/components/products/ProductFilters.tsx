@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 const CATEGORIES = ['All', 'Electronics', 'Clothing', 'Home'];
 
@@ -11,6 +11,12 @@ export function ProductFilters() {
 
   const currentCategory = searchParams?.get('category') || 'All';
   const currentPrice = searchParams?.get('price') || '1000';
+
+  const [localPrice, setLocalPrice] = useState(currentPrice);
+
+  useEffect(() => {
+    setLocalPrice(currentPrice);
+  }, [currentPrice]);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -30,7 +36,11 @@ export function ProductFilters() {
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    router.push(`/?${createQueryString('price', e.target.value)}`);
+    setLocalPrice(e.target.value);
+  };
+
+  const handlePriceCommit = () => {
+    router.push(`/?${createQueryString('price', localPrice)}`);
   };
 
   return (
@@ -65,13 +75,15 @@ export function ProductFilters() {
           min="0"
           max="1000"
           step="10"
-          value={currentPrice}
+          value={localPrice}
           onChange={handlePriceChange}
+          onMouseUp={handlePriceCommit}
+          onTouchEnd={handlePriceCommit}
           className="w-full accent-white"
         />
         <div className="flex justify-between text-xs mt-2 text-white/80">
           <span>0</span>
-          <span>{currentPrice}</span>
+          <span>{localPrice}</span>
         </div>
       </div>
     </div>
