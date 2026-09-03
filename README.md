@@ -3,7 +3,7 @@
 A polished, responsive e-commerce frontend built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Live Demo
-[Live Demo](PASTE_VERCEL_URL_HERE)
+[Live Demo](https://whatbytesfrontendassignment.vercel.app)
 
 ## Features
 - **Product Listing:** Responsive grid layout for products.
