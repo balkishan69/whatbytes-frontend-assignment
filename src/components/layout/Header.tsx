@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ShoppingCart, User, Search } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 
@@ -11,6 +11,12 @@ export function Header() {
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '');
   const { state, isHydrated } = useCart();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
 
@@ -54,7 +60,7 @@ export function Header() {
             <ShoppingCart className="h-6 w-6" />
             <span className="ml-2 hidden md:block">Cart</span>
             {/* Cart Badge */}
-            {isHydrated && totalItems > 0 && (
+            {mounted && isHydrated && totalItems > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold h-5 w-5 flex items-center justify-center rounded-full">
                 {totalItems > 99 ? '99+' : totalItems}
               </span>
