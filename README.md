@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Whatbytes E-Commerce Assignment
+
+A polished, responsive e-commerce frontend built with Next.js, TypeScript, and Tailwind CSS.
+
+## Live Demo
+[Live Demo](PASTE_VERCEL_URL_HERE)
+
+## Features
+- **Product Listing:** Responsive grid layout for products.
+- **Search & Filtering:** Real-time search by title/description and URL-synced category & price filtering.
+- **Dynamic Product Pages:** Detailed view for each product (`/product/[id]`).
+- **Cart Functionality:** Client-side state management using React Context + `useReducer`.
+- **Persistent Cart:** Safe `localStorage` hydration without Next.js SSR mismatch errors.
+- **Responsive Design:** Optimized for Mobile, Tablet, and Desktop screens.
+- **Empty States:** Graceful handling of empty cart and invalid product IDs.
+
+## Tech Stack
+- **Framework:** Next.js 14+ (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS (v4)
+- **Icons:** lucide-react
+- **State Management:** React Context API + `useReducer`
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+```bash
+npm install
+```
 
+Then, run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To create an optimized production build, run:
+```bash
+npm run build
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app`: Next.js App Router pages (`layout.tsx`, `page.tsx`, `cart/page.tsx`, `product/[id]/page.tsx`).
+- `src/components/layout`: Global layout components like `Header` and `Footer`.
+- `src/components/products`: Product-specific components (Grid, Cards, Filters, Client-side interactions).
+- `src/context`: Cart state management via React Context (`CartContext.tsx`).
+- `src/data`: Mock product data (`products.ts`).
+- `src/lib`: Helper functions like URL filtering logic (`filterProducts.ts`).
+- `src/types`: TypeScript interfaces for products and cart state.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design Decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **State Management:** Used `useReducer` with Context API as requested. It is lightweight, avoids unnecessary third-party dependencies like Zustand for simple global states, and demonstrates strong React fundamentals.
+- **Cart Persistence:** Implemented a two-pass render (hydration) in `CartContext` to safely load from `localStorage` without triggering Next.js hydration mismatch errors on the initial server render.
+- **Filtering & Search:** Synced directly with URL search parameters (`?category=x&price=y`). This ensures filters are shareable, persistent across reloads, and play nicely with browser history.
+- **Product Data:** Used high-quality stable image URLs from Unsplash instead of colored placeholders to achieve a realistic, polished e-commerce feel matching the reference design.
+- **Styling:** Matched the reference design's deep blue primary color scheme (`#0a4687`) and structural proportions using Tailwind CSS utility classes.

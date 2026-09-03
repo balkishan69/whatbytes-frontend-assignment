@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useReducer, useContext, useEffect, useState } from 'react';
-import { CartState, CartAction, CartItem } from '@/types/cart';
+import { CartState, CartAction } from '@/types/cart';
 
 const initialState: CartState = {
   items: [],
@@ -71,6 +71,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         console.error('Failed to parse cart from local storage', e);
       }
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsHydrated(true);
   }, []);
 

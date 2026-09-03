@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+
 import { products } from '@/data/products';
 import { ProductDetailClient } from '@/components/products/ProductDetailClient';
 import { Star, ChevronRight } from 'lucide-react';
@@ -23,7 +23,7 @@ export default async function ProductPage({ params }: Props) {
     return (
       <div className="container mx-auto px-4 py-20 text-center flex-1 flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-        <p className="text-gray-600 mb-8">We couldn't find the product you're looking for.</p>
+        <p className="text-gray-600 mb-8">We couldn&apos;t find the product you&apos;re looking for.</p>
         <Link 
           href="/"
           className="bg-primary hover:bg-[#08376b] text-white px-6 py-2 rounded-lg transition-colors"
