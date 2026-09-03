@@ -15,6 +15,7 @@ export function ProductFilters() {
   const [localPrice, setLocalPrice] = useState(currentPrice);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocalPrice(currentPrice);
   }, [currentPrice]);
 
